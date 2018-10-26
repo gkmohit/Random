@@ -20,7 +20,7 @@ import { StyleSheet,
         joke:{},
         quote:{},
         image:{},
-        errorMessage: []
+        errorMessage: ""
       }
       
     }
@@ -195,6 +195,7 @@ import { StyleSheet,
             isImage:false,
             errorMessage: error
           })
+          console.log(this.state);
           this.setShowAnimation(false);
         });
       this.setState({

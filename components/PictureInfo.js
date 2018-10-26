@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FontAwesome } from '@expo/vector-icons';
 import { 
   StyleSheet, 
   Text,
   View,
+  Image
 } from 'react-native';
-import { Avatar } from 'react-native-elements';
 
 export default class PictureInfo extends React.Component {
 
@@ -20,14 +19,9 @@ export default class PictureInfo extends React.Component {
 
         return (
             <View style={styles.container}>
-                
-                <Avatar
-                    size='large'
-                    rounded
-                    icon={{name: 'user', size: 'large'}}
+                <Image 
                     source={{uri: profileImage}}
-                    activeOpacity={0.2}   
-                    containerStyle={styles.avatarContainer}
+                    style={styles.imageContainer}
                 />
                 <View style={styles.descriptionAndNameContainer}>
                     <Text
@@ -51,16 +45,16 @@ export default class PictureInfo extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
       flexDirection: 'row'
     },
 
-    avatarContainer:{  
-        flex: 1.5,
-        backgroundColor: "#FFF",
+    imageContainer:{
+        flex: 1.5,  
+        width: 100, 
         height: 100,
+        backgroundColor: "#FFF",
         alignContent: 'center',
         justifyContent: 'space-around',
     },
@@ -73,7 +67,8 @@ const styles = StyleSheet.create({
 
     textStyle: {
         color : "#FFFFFF",
-        fontSize : 20
+        fontSize : 20,
+        textAlign: "center"
 
     }, 
     
