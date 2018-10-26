@@ -16,36 +16,29 @@ export default class PictureInfo extends React.Component {
     render() { 
         const userName = this.props.userName;
         const description = this.props.description;
-        const profileImage = this.props.profileImage;
-        const titleTextStyle = {
-            color: "#FFF",
-            fontSize: 45,
-            textAlign: "center",
-            padding: 1,
-        };
-        const fontAwesomeStyle = { 
-            color: '#FFF' 
-        };
+        const profileImage = this.props.profileImage;;
+
         return (
-            <View style={styles.avatarAndTextStyle}>
+            <View style={styles.container}>
+                
                 <Avatar
-                    size="xlarge"
+                    size='large'
                     rounded
-                    icon={{name: 'user'}}
-                    source={{uri: this.props.profile_image}}
-                    activeOpacity={0.7}   
-                    style={styles.avatarStyle}
+                    icon={{name: 'user', size: 'large'}}
+                    source={{uri: profileImage}}
+                    activeOpacity={0.2}   
+                    containerStyle={styles.avatarContainer}
                 />
-                <View style={styles.descriptionAndNameStyle}>
+                <View style={styles.descriptionAndNameContainer}>
                     <Text
                         accessibilityLabel={description}
-                        style= {styles.descriptionTextStyle} 
+                        style= {styles.textStyle} 
                         >
-                        "{description}"
+                        {description}
                     </Text>
                     <Text
                         accessibilityLabel={userName}
-                        style= {styles.userNameTextStyle} 
+                        style= {styles.textStyle} 
                         >
                         - {userName}
                     </Text>
@@ -61,7 +54,29 @@ const styles = StyleSheet.create({
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
+      flexDirection: 'row'
     },
+
+    avatarContainer:{  
+        flex: 1.5,
+        backgroundColor: "#FFF",
+        height: 100,
+        alignContent: 'center',
+        justifyContent: 'space-around',
+    },
+
+    descriptionAndNameContainer:{
+        flex: 2,
+        flexDirection: 'column',
+        
+    },
+
+    textStyle: {
+        color : "#FFFFFF",
+        fontSize : 20
+
+    }, 
+    
   });
 
   PictureInfo.propTypes = {

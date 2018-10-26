@@ -178,7 +178,7 @@ import { StyleSheet,
             description: response.data.description,
             height: response.data.height,
             width: response.data.width,
-            profile_image: response.data.user.profile_image.medium,
+            profile_image: response.data.user.profile_image.large,
             source: "https://www.unsplash.com",
             setShowAnimation: this.setShowAnimation
           }
