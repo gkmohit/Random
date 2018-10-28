@@ -163,7 +163,7 @@ import { StyleSheet,
     };
   
     getImage = () => {
-      
+      this.setShowAnimation(true);
       axios({
         method:'get',
         url: 'https://api.unsplash.com/photos/random?client_id=012eb241a70b56ae53f79665f1bcde203359b2bd4f884f1b427b3181bde15d67',

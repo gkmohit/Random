@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#FFF",
         alignContent: 'center',
         justifyContent: 'space-around',
+        borderRadius: 100
     },
 
     descriptionAndNameContainer:{
