@@ -7,19 +7,22 @@ import { StyleSheet,
   import Joke from './components/Joke.js';
   import ImageScreen from './components/ImageScreen.js';
   import ErrorScreen from './components/ErrorScreen.js'
+import Movie from './components/Movie.js';
   export default class App extends React.Component {
   
     
     constructor(props) { 
       super(props)
       this.state = {
-        showAnimation: true,
+        showAnimation: false,
         isJoke: false,
         isQuote: false,
         isError: false,
+        isMovie: false,
         joke:{},
         quote:{},
         image:{},
+        movie:{},
         errorMessage: ""
       }
       
@@ -33,7 +36,8 @@ import { StyleSheet,
       const joke =  <Joke joke={this.state.joke}/>
       const quote = <Quote quote={this.state.quote}/>
       const imageScreen = <ImageScreen image={this.state.image}/>
-      const error = <ErrorScreen />
+      const movieScreen = <Movie />
+      const error = <ErrorScreen />;
       const showAnimation = this.state.showAnimation;
       let displayItem;
       if( this.state.isJoke){
@@ -44,6 +48,8 @@ import { StyleSheet,
         displayItem = error;
       } else if( this.state.isImage){
         displayItem = imageScreen;
+      } else if( this.state.isMovie){
+        displayItem = movieScreen;
       }
       return(
         <TouchableOpacity style={styles.container} onPress={this.setComponent}>
@@ -72,32 +78,44 @@ import { StyleSheet,
     }
   
     decider = () => {
-      const min = 1;
-      const max = 100;
-      const rand = min + Math.floor(Math.random() * (max - min));
-      
-      if( rand % 2 === 0){
+      const min = 0;
+      const max = 4;
+      const rand = this.randomNumber(max, min)
+      console.log(rand);
+      if( rand === 0){
         this.getQuote();
         this.setState({
           isQuote: true,
           isJoke: false,
           isImage:false,
+          isMovie:false,
           isError:false
         });
-      } else if( rand % 3 === 0){
+      } else if( rand  === 1){
         this.getDadJoke();
         this.setState({
           isQuote: false,
           isJoke: true,
           isImage:false,
+          isMovie:false,
           isError:false
         });
-      } else {
+      } else if( rand  === 2){
+        this.getMovie();
+        this.setState({
+          isQuote: false,
+          isJoke: false,
+          isImage:false,
+          isMovie:true,
+          isError:false
+        });
+      } else  if( rand === 3) {
         this.getImage();
         this.setState({
           isQuote: false,
           isJoke: false,
           isImage:true,
+          isMovie:false,
           isError:false
         });
       }
@@ -126,6 +144,7 @@ import { StyleSheet,
             isQuote: false,
             isJoke: false,
             isImage:false,
+            isMovie:false,
             errorMessage: error
           })
           this.setShowAnimation(false);
@@ -156,6 +175,7 @@ import { StyleSheet,
             isQuote: false,
             isJoke: false,
             isImage:false,
+            isMovie:false,
             errorMessage: error
           })
           this.setShowAnimation(false);
@@ -193,6 +213,7 @@ import { StyleSheet,
             isQuote: false,
             isJoke: false,
             isImage:false,
+            isMovie:false,
             errorMessage: error
           })
           console.log(this.state);
@@ -203,7 +224,47 @@ import { StyleSheet,
         isQuote: false,
         isJoke: false,
         isImage: true,
+        isMovie: false,
       });
+    }
+    getMovie = () => {
+      this.setShowAnimation(true);
+      var max = 1960;
+      var min = 2018;
+      var year =  this.randomNumber(max, min)
+      var url = 'https://api.themoviedb.org/3/discover/movie?primary_release_year=' + year + '&page=1&include_video=false&include_adult=false&sort_by=popularity.desc&language=en-US&api_key=b94d3c1a76fe61936b8b49622936df3a'
+      console.log(url);
+      axios({
+        method:'get',
+        url: url,
+      }).then( (response) => {
+        var length = response.data.results.length;
+        console.log(response.data.results[this.randomNumber(length, 0)]);
+        this.setShowAnimation(false);
+      }).catch( (error) => {
+        console.log("getMovie error " + error);
+        this.setState({
+          isError: true, 
+          isQuote: false,
+          isJoke: false,
+          isImage:false,
+          isMovie:false,
+          errorMessage: error
+        })
+        console.log(this.state);
+        this.setShowAnimation(false);
+      });
+      this.setState({
+        isError: false, 
+        isQuote: false,
+        isJoke: false,
+        isImage: false,
+        isMovie: true,
+      });
+    }
+
+    randomNumber = (max, min) => {
+      return min + Math.floor(Math.random() * (max - min));
     }
   }
   

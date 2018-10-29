@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
         flex: 1.5,  
         width: 100, 
         height: 100,
-        backgroundColor: "#FFF",
+        backgroundColor: "#000",
         alignContent: 'center',
         justifyContent: 'space-around',
         borderRadius: 100

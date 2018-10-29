@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import PropTypes from 'prop-types';
 import { 
   StyleSheet, 
@@ -8,21 +7,24 @@ import {
   ActivityIndicator
 } from 'react-native';
 
-export default class ErrorScreen extends React.Component {
-
+export default class Movie extends React.Component {
+    
     constructor(props) {
         super(props);
     }
-    render() { 
-        const error = this.props.error;
-        console.log("ERROR SCREEN: " + error);
 
-        return (
+    componentWillReceiveProps(){
+        this.setState({ })
+    }
+
+    render() { 
+        return(
             <View style={styles.container}>
                 <Text
-                    accessibilityLabel={error}
-                    style= {styles.errorTextStyle} >
-                    {"Helllo"}
+                    accessibilityLabel={"MOVIE"}
+                    style = {styles.errorTextStyle}
+                    >
+                    {"MOVIEEEEE TIMEEEE"}
                 </Text>
             </View>
         )
@@ -41,6 +43,6 @@ const styles = StyleSheet.create({
         textAlign: "center",
     }
   });
-  ErrorScreen.propTypes = {
+  Movie.propTypes = {
     error : PropTypes.array,
 }
